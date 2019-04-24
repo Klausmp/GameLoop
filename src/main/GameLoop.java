@@ -1,8 +1,8 @@
 package main;
 
-import graphics.Renderer;
+import graphics.Window;
 import graphics.displays.GamePanel;
-import input.Keyboard;
+import graphics.Texture;
 import util.Util;
 
 /**
@@ -10,7 +10,7 @@ import util.Util;
  */
 
 public class GameLoop {
-    public static Renderer renderer = new Renderer();
+    public static Window window;
 
     private static boolean gameRunning = true;
 
@@ -26,7 +26,7 @@ public class GameLoop {
     private static int tps = 0;
     private static int currentTick = 0;
 
-    private static final int TPS = 60;
+    private static final int TPS = 60 ;
     private static final int FPS = 60;
 
     public void run() {
@@ -34,8 +34,8 @@ public class GameLoop {
     }
 
     public void init() {
-        Renderer renderer = new Renderer();
-        Keyboard keyboard = new Keyboard();
+        Texture.TextureLoader.loadTextures();
+        window = new Window();
     }
 
     private static void gameLoop() {
@@ -75,7 +75,7 @@ public class GameLoop {
             }
 
             if (System.currentTimeMillis() - getFpsTimer() >= 1000) {
-                System.out.println("FPS: " + getFps());
+                //System.out.println("FPS: " + getFps());
                 setFps(0);
                 setTps(0);
                 setFpsTimer(getFpsTimer() + 1000);
@@ -92,6 +92,7 @@ public class GameLoop {
 
     private static void gameTick() {
         Util.clearLists();
+        GamePanel.update();
     }
 
     public static void gameTicks() {
@@ -101,12 +102,12 @@ public class GameLoop {
         }
     }
 
-    public static Renderer getRenderer() {
-        return renderer;
+    public static Window getWindow() {
+        return window;
     }
 
-    public static void setRenderer(Renderer renderer) {
-        GameLoop.renderer = renderer;
+    public static void setWindow(Window window) {
+        GameLoop.window = window;
     }
 
     public static boolean isGameRunning() {

@@ -1,11 +1,11 @@
 package main;
 
 /**
- * @author Klausmp
+ * @author Klausmp V 1.0
  */
 
 public class Main {
-    public static final String gameTitle = "Mine Sweeper";
+    public static final String gameTitle = "SPACER";
     public static int highScore = 0;
     public static GameLoop gameLoop = new GameLoop();
 
